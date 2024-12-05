@@ -1,0 +1,6 @@
+The State Design Pattern is a behavioral design pattern that allows an object to alter its behavior when its internal state changes. This pattern is used to manage state-specific logic by encapsulating it into separate state classes. It helps in reducing complexity by avoiding conditional statements (like if-else or switch-case) for state transitions and behaviors.
+
+Key Concepts:
+Context: Maintains an instance of a concrete state object that defines the current state.
+State Interface: Defines the interface for all concrete state classes.
+Concrete States: Implement behaviors associated with a particular state of the context.
