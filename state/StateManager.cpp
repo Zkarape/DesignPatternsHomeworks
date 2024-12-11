@@ -35,11 +35,6 @@ IState *StateManager::get_NotHavingTheKnowledgeButNotBeingInterested_State() con
 }
 
 
-void StateManager::set_state(IState *state_to_set)
-{
-    _CurrentState = state_to_set;
-}
-
 StateManager::~StateManager()
 {
     delete _NotBeingInterested;

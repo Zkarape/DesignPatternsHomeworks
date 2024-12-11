@@ -2,6 +2,9 @@
 # define STATEMANAGER_HPP
 
 #include "State.hpp"
+#include <memory>
+#include <iostream>
+
 
 class StateManager
 {
@@ -11,11 +14,16 @@ private:
     IState *_NotHavingTheKnowledgeButNotBeingInterested;
     IState *_NotBeingInterested;
 
-    IState *_CurrentState;
+    std::shared_ptr<IState> _CurrentState;
+
 
 public:
     StateManager(/* args */);
-    void set_state(IState *state_to_set);
+    void setState(std::shared_ptr<IState> state) {
+        _CurrentState = std::move(state);
+    }
+
+
     IState *get_AlreadyHavingTheKnowledge_State() const;
     IState *get_NotHavingTheKnowledgeButBeingInterested_State() const;
     IState *get_NotHavingTheKnowledgeButNotBeingInterested_State() const;
@@ -36,6 +44,7 @@ public:
     {
         _CurrentState->ReadOrListen();
     };
+
 
     ~StateManager();
 };

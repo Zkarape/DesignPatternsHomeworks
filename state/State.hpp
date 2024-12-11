@@ -2,22 +2,14 @@
 # define STATE_HPP
 
 #include "StateManager.hpp"
-#include "iostream"
+#include <iostream>
 
 class StateManager;
-
-class State
-{
-private:
-    /* data */
-public:
-    State(/* args */);
-    ~State();
-};
 
 class IState
 {
     public:
+    virtual ~IState() = default;
     virtual void Think() = 0;
     virtual void AskQuestion() = 0;
     virtual void ReadOrListen() = 0;
@@ -41,8 +33,10 @@ class AlreadyHavingTheKnowledge : public IState
         void ReadOrListen()
         {
             std::cout << "I have heard you, and I already know the topic" << std::endl;
+            manager->setState(std::make_shared<NotBeingInterested>());
         }
 };
+
 
 class NotHavingTheKnowledgeButBeingInterested : public IState
 {
@@ -61,9 +55,10 @@ class NotHavingTheKnowledgeButBeingInterested : public IState
         void ReadOrListen()
         {
             std::cout << "I have heard you, and it is interesting" << std::endl;
+            manager->setState(std::make_shared<AlreadyHavingTheKnowledge>());
         }
-
 };
+
 
 class NotHavingTheKnowledgeButNotBeingInterested : public IState
 {
@@ -82,6 +77,7 @@ class NotHavingTheKnowledgeButNotBeingInterested : public IState
         void ReadOrListen()
         {
             std::cout << "I have heard you, and it is not interesting" << std::endl;
+            manager->setState(std::make_shared<NotHavingTheKnowledgeButBeingInterested>());
         }
 
 };
@@ -103,6 +99,7 @@ class NotBeingInterested : public IState
         void ReadOrListen()
         {
             std::cout << "I don't want to listen to you" << std::endl;
+            manager->setState(std::make_shared<NotHavingTheKnowledgeButNotBeingInterested>());
         }
 
 };
