@@ -14,7 +14,7 @@ IState *StateManager::get_AlreadyHavingTheKnowledge_State() const
     return _AlreadyHavingTheKnowledge;
 }
 
-IState *StateManager::get_CurrentState() const
+std::shared_ptr<IState> StateManager::get_CurrentState() const
 {
     return _CurrentState;
 }

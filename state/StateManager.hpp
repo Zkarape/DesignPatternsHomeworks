@@ -28,7 +28,7 @@ public:
     IState *get_NotHavingTheKnowledgeButBeingInterested_State() const;
     IState *get_NotHavingTheKnowledgeButNotBeingInterested_State() const;
     IState *get_NotBeingInterested_State() const;
-    IState *get_CurrentState() const;
+    std::shared_ptr<IState> get_CurrentState() const;
 
     void Think()
     {
